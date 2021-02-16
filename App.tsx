@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
 import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { GraphQLResult } from "@aws-amplify/api";
+import { ListTodosQuery } from "./api";
 import { withAuthenticator } from "aws-amplify-react-native";
 import { createTodo } from "./src/graphql/mutations";
 import { listTodos } from "./src/graphql/queries";
@@ -10,23 +12,36 @@ import { listTodos } from "./src/graphql/queries";
 import config from "./aws-exports";
 Amplify.configure(config);
 
+interface InitialState {
+  name: string;
+  description: string;
+}
+
+interface ITodo {
+  id?: string;
+  name: string;
+  description: string;
+}
+
 const initialState = { name: "", description: "" };
 
 const App = () => {
-  const [formState, setFormState] = useState(initialState);
-  const [todos, setTodos] = useState([]);
+  const [formState, setFormState] = useState<InitialState>(initialState);
+  const [todos, setTodos] = useState<ITodo[] | []>([]);
 
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  function setInput(key, value) {
+  function setInput(key: string, value: string) {
     setFormState({ ...formState, [key]: value });
   }
 
   async function fetchTodos() {
     try {
-      const todoData = await API.graphql(graphqlOperation(listTodos));
+      const todoData = (await API.graphql(
+        graphqlOperation(listTodos)
+      )) as GraphQLResult<ListTodosQuery>;
       const todos = todoData.data.listTodos.items;
       setTodos(todos);
     } catch (err) {
@@ -36,7 +51,7 @@ const App = () => {
 
   async function addTodo() {
     try {
-      const todo = { ...formState };
+      const todo: ITodo = { ...formState };
       setTodos([...todos, todo]);
       setFormState(initialState);
       await API.graphql(graphqlOperation(createTodo, { input: todo }));
@@ -60,7 +75,7 @@ const App = () => {
         placeholder="Description"
       />
       <Button title="Create Todo" onPress={addTodo} />
-      {todos.map((todo, index) => (
+      {todos.map((todo: ITodo, index: number) => (
         <View key={todo.id ? todo.id : index} style={styles.todo}>
           <Text style={styles.todoName}>{todo.name}</Text>
           <Text>{todo.description}</Text>

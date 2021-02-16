@@ -17,3 +17,5 @@ $ amplify add api #accept defaults
 $ amplify push
 
 $ amplify status
+
+## Github deploy via AWS web app.
