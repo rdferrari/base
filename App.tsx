@@ -9,7 +9,7 @@ import { withAuthenticator } from "aws-amplify-react-native";
 import { createTodo, deleteTodo } from "./src/graphql/mutations";
 import { listTodos } from "./src/graphql/queries";
 
-import { useForm, Controller, setValue } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 import config from "./aws-exports";
 Amplify.configure(config);
@@ -20,10 +20,15 @@ interface ITodo {
   description?: string;
 }
 
+type FormValues = {
+  name: string;
+  description: string;
+};
+
 const App = () => {
   const [todos, setTodos] = useState<ITodo[] | []>([]);
   // react-hook-form
-  const { control, handleSubmit, errors } = useForm();
+  const { control, handleSubmit, errors, reset } = useForm<FormValues>();
 
   useEffect(() => {
     fetchTodos();
@@ -46,6 +51,10 @@ const App = () => {
       const todo: ITodo = { ...data };
       setTodos([...todos, todo]);
       await API.graphql(graphqlOperation(createTodo, { input: todo }));
+      reset({
+        name: "",
+        description: "",
+      });
     } catch (err) {
       console.log("error creating todo:", err);
     }
