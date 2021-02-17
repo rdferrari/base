@@ -6,36 +6,28 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListTodosQuery } from "./api";
 import { withAuthenticator } from "aws-amplify-react-native";
-import { createTodo } from "./src/graphql/mutations";
+import { createTodo, deleteTodo } from "./src/graphql/mutations";
 import { listTodos } from "./src/graphql/queries";
+
+import { useForm, Controller, setValue } from "react-hook-form";
 
 import config from "./aws-exports";
 Amplify.configure(config);
 
-interface InitialState {
-  name: string;
-  description: string;
-}
-
 interface ITodo {
   id?: string;
   name: string;
-  description: string;
+  description?: string;
 }
 
-const initialState = { name: "", description: "" };
-
 const App = () => {
-  const [formState, setFormState] = useState<InitialState>(initialState);
   const [todos, setTodos] = useState<ITodo[] | []>([]);
+  // react-hook-form
+  const { control, handleSubmit, errors } = useForm();
 
   useEffect(() => {
     fetchTodos();
   }, []);
-
-  function setInput(key: string, value: string) {
-    setFormState({ ...formState, [key]: value });
-  }
 
   async function fetchTodos() {
     try {
@@ -49,36 +41,63 @@ const App = () => {
     }
   }
 
-  async function addTodo() {
+  async function addTodo(data) {
     try {
-      const todo: ITodo = { ...formState };
+      const todo: ITodo = { ...data };
       setTodos([...todos, todo]);
-      setFormState(initialState);
       await API.graphql(graphqlOperation(createTodo, { input: todo }));
     } catch (err) {
       console.log("error creating todo:", err);
     }
   }
 
+  const removeTodo = async (id: string) => {
+    try {
+      const input = { id };
+      const result = await API.graphql(
+        graphqlOperation(deleteTodo, {
+          input,
+        })
+      );
+      const deletedTodoId = result.data.deleteTodo.id;
+      const updatedTodo = todos.filter((todo) => todo.id !== deletedTodoId);
+      setTodos(updatedTodo);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput
-        onChangeText={(val) => setInput("name", val)}
+      <Text>Title</Text>
+      <Controller
+        as={TextInput}
+        control={control}
+        name="name"
+        onChange={(args) => args[0].nativeEvent.text}
+        rules={{ required: true }}
+        defaultValue=""
         style={styles.input}
-        value={formState.name}
-        placeholder="Name"
       />
-      <TextInput
-        onChangeText={(val) => setInput("description", val)}
+      {errors.name && <Text>This is required.</Text>}
+
+      <Text>Description</Text>
+      <Controller
+        as={TextInput}
+        control={control}
+        name="description"
+        onChange={(args) => args[0].nativeEvent.text}
+        defaultValue=""
         style={styles.input}
-        value={formState.description}
-        placeholder="Description"
       />
-      <Button title="Create Todo" onPress={addTodo} />
+
+      <Button title="Submit" onPress={handleSubmit(addTodo)} />
+
       {todos.map((todo: ITodo, index: number) => (
         <View key={todo.id ? todo.id : index} style={styles.todo}>
           <Text style={styles.todoName}>{todo.name}</Text>
           <Text>{todo.description}</Text>
+          <Button title="Delete" onPress={() => removeTodo(todo.id)} />
         </View>
       ))}
     </View>
