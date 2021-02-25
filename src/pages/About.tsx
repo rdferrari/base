@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { PageContainer, PageTitle } from "../styles/general";
 
 function About() {
   return (
-    <View>
-      <Text>About</Text>
-    </View>
+    <PageContainer>
+      <PageTitle>About</PageTitle>
+    </PageContainer>
   );
 }
 
