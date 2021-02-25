@@ -1,123 +1,37 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import React from "react";
+import Amplify from "aws-amplify";
+import { Text, View } from "react-native";
+import { NativeRouter, Route, Link } from "react-router-native";
 
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { GraphQLResult } from "@aws-amplify/api";
-import { ListTodosQuery } from "./api";
-import { withAuthenticator } from "aws-amplify-react-native";
-import { createTodo, deleteTodo } from "./src/graphql/mutations";
-import { listTodos } from "./src/graphql/queries";
-
-import { useForm, Controller } from "react-hook-form";
+import Home from "./src/pages/Home";
+import SignIn from "./src/pages/SignIn";
+import About from "./src/pages/About";
 
 import config from "./aws-exports";
 Amplify.configure(config);
 
-interface ITodo {
-  id?: string;
-  name: string;
-  description?: string;
+function App() {
+  return (
+    <NativeRouter>
+      <View>
+        <View>
+          <Link to="/" underlayColor="#f0f4f7">
+            <Text>Home</Text>
+          </Link>
+          <Link to="/about" underlayColor="#f0f4f7">
+            <Text>About</Text>
+          </Link>
+          <Link to="/signin" underlayColor="#f0f4f7">
+            <Text>Sign in</Text>
+          </Link>
+        </View>
+
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/signin" component={SignIn} />
+      </View>
+    </NativeRouter>
+  );
 }
 
-type FormValues = {
-  name: string;
-  description: string;
-};
-
-const App = () => {
-  const [todos, setTodos] = useState<ITodo[] | []>([]);
-  // react-hook-form
-  const { control, handleSubmit, errors, reset } = useForm<FormValues>();
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
-  async function fetchTodos() {
-    try {
-      const todoData = (await API.graphql(
-        graphqlOperation(listTodos)
-      )) as GraphQLResult<ListTodosQuery>;
-      const todos = todoData.data.listTodos.items;
-      setTodos(todos);
-    } catch (err) {
-      console.log("error fetching todos");
-    }
-  }
-
-  async function addTodo(data) {
-    try {
-      const todo: ITodo = { ...data };
-      setTodos([...todos, todo]);
-      await API.graphql(graphqlOperation(createTodo, { input: todo }));
-      reset({
-        name: "",
-        description: "",
-      });
-    } catch (err) {
-      console.log("error creating todo:", err);
-    }
-  }
-
-  const removeTodo = async (id: string) => {
-    try {
-      const input = { id };
-      const result = await API.graphql(
-        graphqlOperation(deleteTodo, {
-          input,
-        })
-      );
-      const deletedTodoId = result.data.deleteTodo.id;
-      const updatedTodo = todos.filter((todo) => todo.id !== deletedTodoId);
-      setTodos(updatedTodo);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text>Title</Text>
-      <Controller
-        as={TextInput}
-        control={control}
-        name="name"
-        onChange={(args) => args[0].nativeEvent.text}
-        rules={{ required: true }}
-        defaultValue=""
-        style={styles.input}
-      />
-      {errors.name && <Text>This is required.</Text>}
-
-      <Text>Description</Text>
-      <Controller
-        as={TextInput}
-        control={control}
-        name="description"
-        onChange={(args) => args[0].nativeEvent.text}
-        defaultValue=""
-        style={styles.input}
-      />
-
-      <Button title="Submit" onPress={handleSubmit(addTodo)} />
-
-      {todos.map((todo: ITodo, index: number) => (
-        <View key={todo.id ? todo.id : index} style={styles.todo}>
-          <Text style={styles.todoName}>{todo.name}</Text>
-          <Text>{todo.description}</Text>
-          <Button title="Delete" onPress={() => removeTodo(todo.id)} />
-        </View>
-      ))}
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", padding: 20 },
-  todo: { marginBottom: 15 },
-  input: { height: 50, backgroundColor: "#ddd", marginBottom: 10, padding: 8 },
-  todoName: { fontSize: 18 },
-});
-
-export default withAuthenticator(App);
+export default App;
