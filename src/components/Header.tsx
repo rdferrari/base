@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { Link } from "react-router-native";
 // Context
 import { UserStatusContext } from "../../App";
 // Component
