@@ -5,8 +5,9 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { UserStatusContext } from "../../App";
 // Component
 import DesktopHeader from "./DesktopHeader";
+import MobileHeader from "./MobileHeader";
 
-const styles = EStyleSheet.create({
+export const styles = EStyleSheet.create({
   header_container: {
     backgroundColor: "white",
     boxShadow: "2px 2px 5px grey",
@@ -20,22 +21,11 @@ const styles = EStyleSheet.create({
     width: "100%",
     zIndex: 1000,
   },
-  flex_container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  button: {
-    marginLeft: "40px",
-    height: "46px",
-    width: "107px",
-  },
-  logo: {
-    height: "46px",
-    width: "46px",
-  },
   desktop_header: {
     display: "iherint",
+  },
+  mobile_header: {
+    display: "none",
   },
 
   "@media (min-width: 350px) and (max-width: 1280)": {
@@ -48,6 +38,9 @@ const styles = EStyleSheet.create({
     },
     desktop_header: {
       display: "none",
+    },
+    mobile_header: {
+      display: "iherint",
     },
   },
 });
@@ -62,7 +55,10 @@ function Header({ signOut }: Props) {
       {(user) => (
         <View style={styles.header_container}>
           <View style={styles.desktop_header}>
-            <DesktopHeader styles={styles} signOut={signOut} isUser={user} />
+            <DesktopHeader signOut={signOut} isUser={user} />
+          </View>
+          <View style={styles.mobile_header}>
+            <MobileHeader />
           </View>
         </View>
       )}
