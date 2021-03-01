@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="107" height="46" viewBox="0 0 107 46">
+  <g id="Group_51" data-name="Group 51" transform="translate(-188 -82)">
+    <g id="Group_50" data-name="Group 50">
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="107" height="46" transform="translate(188 82)" fill="#fff"/>
+      <text id="Sign_out" data-name="Sign out" transform="translate(237 111)" fill="#383838" font-size="15" font-family="Roboto-Regular, Roboto"><tspan x="0" y="0">Sign out</tspan></text>
+    </g>
+    <g id="logout-24px" transform="translate(198 93)">
+      <g id="Group_48" data-name="Group 48">
+        <path id="Path_24" data-name="Path 24" d="M0,0H24V24H0Z" fill="none"/>
+      </g>
+      <g id="Group_49" data-name="Group 49">
+        <path id="Path_25" data-name="Path 25" d="M17,8,15.59,9.41,17.17,11H9v2h8.17l-1.58,1.58L17,16l4-4ZM5,5h7V3H5A2.006,2.006,0,0,0,3,5V19a2.006,2.006,0,0,0,2,2h7V19H5Z" fill="#383838"/>
+      </g>
+    </g>
+  </g>
+</svg>

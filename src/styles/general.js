@@ -1,9 +1,7 @@
 import styled from "styled-components/native";
 
 export const PageContainer = styled.View`
- 
   background-color: white;
-  
 `;
 
 export const PageTitle = styled.Text`
