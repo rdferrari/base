@@ -5,6 +5,7 @@ import { Link } from "react-router-native";
 // Context
 import { UserStatusContext } from "../../App";
 // Component
+import DesktopHeader from "./DesktopHeader";
 
 const styles = EStyleSheet.create({
   header_container: {
@@ -34,6 +35,9 @@ const styles = EStyleSheet.create({
     height: "46px",
     width: "46px",
   },
+  desktop_header: {
+    display: "iherint",
+  },
 
   "@media (min-width: 350px) and (max-width: 1280)": {
     // media queries
@@ -42,6 +46,9 @@ const styles = EStyleSheet.create({
       paddingBottom: "10px",
       paddingLeft: "20px",
       paddingRight: "20px",
+    },
+    desktop_header: {
+      display: "none",
     },
   },
 });
@@ -55,44 +62,8 @@ function Header({ signOut }: Props) {
     <UserStatusContext.Consumer>
       {(user) => (
         <View style={styles.header_container}>
-          <View style={styles.flex_container}>
-            <View style={styles.flex_container}>
-              <Link to="/">
-                <Image
-                  style={styles.logo}
-                  source={require("../svg/logo.svg")}
-                />
-              </Link>
-              <Link to="/">
-                <Image
-                  style={styles.button}
-                  source={require("../svg/bt-home.svg")}
-                />
-              </Link>
-              <Link to="/list">
-                <Image
-                  style={styles.button}
-                  source={require("../svg/bt-list.svg")}
-                />
-              </Link>
-            </View>
-
-            <>
-              {user === null ? (
-                <Image
-                  style={styles.button}
-                  source={require("../svg/bt-sign-out.svg")}
-                  signOut={() => signOut}
-                />
-              ) : (
-                <Link to="/sign-in">
-                  <Image
-                    style={styles.button}
-                    source={require("../svg/bt-sign-in.svg")}
-                  />
-                </Link>
-              )}
-            </>
+          <View style={styles.desktop_header}>
+            <DesktopHeader styles={styles} signOut={signOut} isUser={user} />
           </View>
         </View>
       )}
