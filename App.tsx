@@ -6,7 +6,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 //Components
 import TextButtom from "./src/components/TextButton";
-import Header from "./src/components/Header";
+import Header from "./src/components/header/Header";
 // Pages
 import Home from "./src/pages/Home";
 // import SignIn from "./src/pages/SignIn";

@@ -1,30 +1,19 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-
-// define extended styles
-const styles = EStyleSheet.create({
-  column: {
-    width: "80%", // 80% of screen width
-  },
-  text: {
-    color: "$textColor", // global variable $textColor
-    fontSize: "15px", // relative REM unit
-  },
-  "@media (min-width: 1000) and (max-width: 1900)": {
-    // media queries
-    text: {
-      fontSize: "30px",
-    },
-  },
-});
+import Hero from "../components/Hero";
 
 // use styles as usual
 class Home extends React.Component {
   render() {
     return (
-      <View style={styles.column}>
-        <Text style={styles.text}>Home</Text>
+      <View>
+        <Hero
+          video="https://base-media-app.s3-ap-southeast-2.amazonaws.com/hero-video.mp4"
+          title="Base"
+          text="My tagline"
+          media="video"
+        />
       </View>
     );
   }

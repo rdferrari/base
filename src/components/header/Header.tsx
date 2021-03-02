@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 // Context
-import { UserStatusContext } from "../../App";
+import { UserStatusContext } from "../../../App";
 // Component
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";

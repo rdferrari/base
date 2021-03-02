@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 declare module 'react-router-native';
-declare module 'styled-components/native';
+declare module 'react-native-video';
 
 export = EStyleSheet;
 

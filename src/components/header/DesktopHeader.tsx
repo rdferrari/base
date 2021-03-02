@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, Button, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Link } from "react-router-native";
 
@@ -31,7 +31,7 @@ function DesktopHeader({ signOut, isUser }: Props) {
       <View style={styles.flex_container}>
         <Link to="/">
           <TouchableOpacity activeOpacity={0.8}>
-            <Image style={styles.logo} source={require("../svg/logo.svg")} />
+            <Image style={styles.logo} source={require("../../svg/logo.svg")} />
           </TouchableOpacity>
         </Link>
 
@@ -39,7 +39,7 @@ function DesktopHeader({ signOut, isUser }: Props) {
           <TouchableOpacity activeOpacity={0.8}>
             <Image
               style={styles.button}
-              source={require("../svg/bt-home.svg")}
+              source={require("../../svg/bt-home.svg")}
             />
           </TouchableOpacity>
         </Link>
@@ -48,7 +48,7 @@ function DesktopHeader({ signOut, isUser }: Props) {
           <TouchableOpacity activeOpacity={0.8}>
             <Image
               style={styles.button}
-              source={require("../svg/bt-list.svg")}
+              source={require("../../svg/bt-list.svg")}
             />
           </TouchableOpacity>
         </Link>
@@ -59,7 +59,7 @@ function DesktopHeader({ signOut, isUser }: Props) {
           <TouchableOpacity activeOpacity={0.8}>
             <Image
               style={styles.button}
-              source={require("../svg/bt-sign-out.svg")}
+              source={require("../../svg/bt-sign-out.svg")}
               signOut={() => signOut}
             />
           </TouchableOpacity>
@@ -68,7 +68,7 @@ function DesktopHeader({ signOut, isUser }: Props) {
             <TouchableOpacity activeOpacity={0.8}>
               <Image
                 style={styles.button}
-                source={require("../svg/bt-sign-in.svg")}
+                source={require("../../svg/bt-sign-in.svg")}
               />
             </TouchableOpacity>
           </Link>

@@ -19,25 +19,26 @@ export const styles = EStyleSheet.create({
 });
 
 interface Props {
-  signOut(): void;
+  signOut: () => () => void;
   isUser: string;
+  onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
-function SignInUpButton({ signOut, isUser }: Props) {
+function SignInUpButton({ signOut, isUser, onPress }: Props) {
   return isUser === null ? (
-    <TouchableOpacity activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <Image
         style={styles.button}
-        source={require("../svg/bt-sign-out.svg")}
+        source={require("../../svg/bt-sign-out.svg")}
         signOut={() => signOut}
       />
     </TouchableOpacity>
   ) : (
     <Link to="/">
-      <TouchableOpacity activeOpacity={0.8}>
+      <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
         <Image
           style={styles.button}
-          source={require("../svg/bt-sign-in.svg")}
+          source={require("../../svg/bt-sign-in.svg")}
         />
       </TouchableOpacity>
     </Link>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import { Link } from "react-router-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import SignInUpButton from "./SignInUpButton";
@@ -46,7 +46,7 @@ function MobileHeader({ signOut, isUser }: Props) {
       <View style={styles.flex_container}>
         <Link to="/">
           <TouchableOpacity activeOpacity={0.8}>
-            <Image style={styles.logo} source={require("../svg/logo.svg")} />
+            <Image style={styles.logo} source={require("../../svg/logo.svg")} />
           </TouchableOpacity>
         </Link>
 
@@ -58,7 +58,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.menu_close}
-                source={require("../svg/bt-close.svg")}
+                source={require("../../svg/bt-close.svg")}
               />
             </TouchableOpacity>
           </View>
@@ -70,7 +70,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.menu_hamburger}
-                source={require("../svg/menu-hamburger.svg")}
+                source={require("../../svg/menu-hamburger.svg")}
               />
             </TouchableOpacity>
           </Link>
@@ -79,7 +79,11 @@ function MobileHeader({ signOut, isUser }: Props) {
 
       {menuIsOpen && (
         <View style={styles.buttons_container}>
-          <SignInUpButton signOut={signOut} isUser={isUser} />
+          <SignInUpButton
+            onPress={() => setMenuIsOpen(!menuIsOpen)}
+            signOut={signOut}
+            isUser={isUser}
+          />
           <Link to="/">
             <TouchableOpacity
               onPress={() => setMenuIsOpen(!menuIsOpen)}
@@ -87,7 +91,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.button}
-                source={require("../svg/bt-home.svg")}
+                source={require("../../svg/bt-home.svg")}
               />
             </TouchableOpacity>
           </Link>
@@ -99,7 +103,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.button}
-                source={require("../svg/bt-list.svg")}
+                source={require("../../svg/bt-list.svg")}
               />
             </TouchableOpacity>
           </Link>
