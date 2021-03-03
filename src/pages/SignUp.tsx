@@ -3,12 +3,12 @@ import { View, Text } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 // use styles as usual
-function SignIn() {
+function SignUp() {
   return (
     <View>
-      <Text>Sign in</Text>
+      <Text>Sign up</Text>
     </View>
   );
 }
 
-export default SignIn;
+export default SignUp;

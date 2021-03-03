@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { BoxShadow } from "react-native-shadow";
 // Context
 import { UserStatusContext } from "../../../App";
 // Component
@@ -9,20 +10,17 @@ import MobileHeader from "./MobileHeader";
 
 export const styles = EStyleSheet.create({
   header_container: {
-    backgroundColor: "white",
-    boxShadow: "2px 2px 5px grey",
+    backgroundColor: "#ffffff",
     left: 0,
-    paddingTop: "10px",
-    paddingBottom: "10px",
-    paddingLeft: "60px",
-    paddingRight: "60px",
-    position: "fixed",
-    top: 0,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 60,
+    paddingRight: 60,
+    top: 40,
     width: "100%",
-    zIndex: 1000,
   },
   desktop_header: {
-    display: "iherint",
+    display: "flex",
   },
   mobile_header: {
     display: "none",
@@ -31,16 +29,16 @@ export const styles = EStyleSheet.create({
   "@media (min-width: 350px) and (max-width: 1280)": {
     // media queries
     header_container: {
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 20,
+      paddingRight: 20,
     },
     desktop_header: {
       display: "none",
     },
     mobile_header: {
-      display: "iherint",
+      display: "flex",
     },
   },
 });

@@ -1,5 +1,4 @@
 import React from "react";
-import { PageContainer, PageTitle } from "../styles/general";
 
 function About() {
   return (

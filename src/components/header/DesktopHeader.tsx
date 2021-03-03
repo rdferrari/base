@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Link } from "react-router-native";
 
@@ -10,13 +10,13 @@ export const styles = EStyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    marginLeft: "40px",
-    height: "46px",
-    width: "107px",
+    marginLeft: 40,
+    height: 46,
+    width: 107,
   },
   logo: {
-    height: "46px",
-    width: "46px",
+    height: 46,
+    width: 46,
   },
 });
 
@@ -29,29 +29,21 @@ function DesktopHeader({ signOut, isUser }: Props) {
   return (
     <View style={styles.flex_container}>
       <View style={styles.flex_container}>
-        <Link to="/">
-          <TouchableOpacity activeOpacity={0.8}>
-            <Image style={styles.logo} source={require("../../svg/logo.svg")} />
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity activeOpacity={0.8}>
+          <Image style={styles.logo} source={require("../../svg/logo.svg")} />
+        </TouchableOpacity>
 
-        <Link to="/">
-          <TouchableOpacity activeOpacity={0.8}>
-            <Image
-              style={styles.button}
-              source={require("../../svg/bt-home.svg")}
-            />
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity activeOpacity={0.8}>
+          <Link to="/">
+            <Text>Home</Text>
+          </Link>
+        </TouchableOpacity>
 
-        <Link to="/list">
-          <TouchableOpacity activeOpacity={0.8}>
-            <Image
-              style={styles.button}
-              source={require("../../svg/bt-list.svg")}
-            />
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity activeOpacity={0.8}>
+          <Link to="/list">
+            <Text>List</Text>
+          </Link>
+        </TouchableOpacity>
       </View>
 
       <>

@@ -1,35 +1,36 @@
 import React, { useState } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import { Link } from "react-router-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import SignInUpButton from "./SignInUpButton";
 
 export const styles = EStyleSheet.create({
   flex_container: {
+    backgroundColor: "#ffffff",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
   menu_hamburger: {
-    marginLeft: "40px",
-    height: "46px",
-    width: "46px",
+    marginLeft: 40,
+    height: 46,
+    width: 46,
   },
   menu_close: {
-    float: "right",
-    height: "46px",
-    width: "46px",
+    height: 46,
+    width: 46,
   },
   logo: {
-    height: "46px",
-    width: "46px",
+    height: 46,
+    width: 46,
   },
   buttons_container: {
-    marginTop: "20px",
+    backgroundColor: "#ffffff",
+    marginTop: 20,
   },
   button: {
-    height: "46px",
-    width: "107px",
+    height: 46,
+    width: 107,
   },
 });
 
@@ -38,17 +39,18 @@ interface Props {
   isUser: string;
 }
 
-function MobileHeader({ signOut, isUser }: Props) {
+function MobileHeader({ signOut, isUser }: Props): JSX.Element {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
-    <View style={styles.mobile_header}>
+    <View>
       <View style={styles.flex_container}>
-        <Link to="/">
-          <TouchableOpacity activeOpacity={0.8}>
-            <Image style={styles.logo} source={require("../../svg/logo.svg")} />
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity activeOpacity={0.8}>
+          <Image
+            style={styles.logo}
+            source={require("../../../assets/png/logo.png")}
+          />
+        </TouchableOpacity>
 
         {menuIsOpen ? (
           <View>
@@ -58,7 +60,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.menu_close}
-                source={require("../../svg/bt-close.svg")}
+                source={require("../../../assets/png/close.png")}
               />
             </TouchableOpacity>
           </View>
@@ -70,7 +72,7 @@ function MobileHeader({ signOut, isUser }: Props) {
             >
               <Image
                 style={styles.menu_hamburger}
-                source={require("../../svg/menu-hamburger.svg")}
+                source={require("../../../assets/png/hamburger.png")}
               />
             </TouchableOpacity>
           </Link>
@@ -84,29 +86,18 @@ function MobileHeader({ signOut, isUser }: Props) {
             signOut={signOut}
             isUser={isUser}
           />
-          <Link to="/">
-            <TouchableOpacity
-              onPress={() => setMenuIsOpen(!menuIsOpen)}
-              activeOpacity={0.8}
-            >
-              <Image
-                style={styles.button}
-                source={require("../../svg/bt-home.svg")}
-              />
-            </TouchableOpacity>
-          </Link>
 
-          <Link to="/list">
-            <TouchableOpacity
-              onPress={() => setMenuIsOpen(!menuIsOpen)}
-              activeOpacity={0.8}
-            >
-              <Image
-                style={styles.button}
-                source={require("../../svg/bt-list.svg")}
-              />
-            </TouchableOpacity>
-          </Link>
+          <TouchableOpacity activeOpacity={0.8}>
+            <Link onPress={() => setMenuIsOpen(!menuIsOpen)} to="/">
+              <Text>Home</Text>
+            </Link>
+          </TouchableOpacity>
+
+          <TouchableOpacity activeOpacity={0.8}>
+            <Link onPress={() => setMenuIsOpen(!menuIsOpen)} to="/list">
+              <Text>List</Text>
+            </Link>
+          </TouchableOpacity>
         </View>
       )}
     </View>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="166" height="46" viewBox="0 0 166 46">
+  <g id="Group_54" data-name="Group 54" transform="translate(-38 -430)">
+    <g id="Group_53" data-name="Group 53" transform="translate(0 335)">
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="166" height="46" transform="translate(38 95)" fill="none"/>
+      <text id="Explore" transform="translate(48 125)" fill="#00b995" font-size="20" font-family="Roboto-Regular, Roboto"><tspan x="0" y="0">Explore</tspan></text>
+    </g>
+    <line id="Line_6" data-name="Line 6" x2="157" transform="translate(38.5 468.5)" fill="none" stroke="#00b995" stroke-width="1"/>
+    <path id="Path_26" data-name="Path 26" d="M11,7,9.6,8.4,12.2,11H2v2H12.2L9.6,15.6,11,17l5-5Z" transform="translate(163 443)" fill="#00b995"/>
+  </g>
+</svg>

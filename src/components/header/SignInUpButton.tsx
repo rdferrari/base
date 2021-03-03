@@ -6,8 +6,8 @@ import { Link } from "react-router-native";
 export const styles = EStyleSheet.create({
   button: {
     marginLeft: "40px",
-    height: "46px",
-    width: "107px",
+    height: 46,
+    width: 107,
   },
 
   "@media (min-width: 350px) and (max-width: 1280)": {

@@ -3,6 +3,13 @@ import {StyleSheet} from 'react-native';
 declare module 'react-router-native';
 declare module 'react-native-video';
 
+declare module "*.svg" {
+    import React from 'react';
+    import { SvgProps } from "react-native-svg";
+    const content: React.FC<SvgProps>;
+    export default content;
+  }
+
 export = EStyleSheet;
 
 declare namespace EStyleSheet {

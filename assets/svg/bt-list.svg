@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="107" height="46" viewBox="0 0 107 46">
+  <g id="Group_16" data-name="Group 16" transform="translate(-38 -184)">
+    <g id="Group_15" data-name="Group 15" transform="translate(0 35)">
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="107" height="46" transform="translate(38 149)" fill="#fff"/>
+      <text id="List" transform="translate(87 178)" fill="#383838" font-size="15" font-family="Roboto-Regular, Roboto"><tspan x="0" y="0">List</tspan></text>
+    </g>
+    <g id="list-24px" transform="translate(50 195)">
+      <g id="Group_14" data-name="Group 14">
+        <path id="Path_13" data-name="Path 13" d="M0,0H24V24H0Z" fill="none"/>
+        <path id="Path_14" data-name="Path 14" d="M0,0H24V24H0Z" fill="none" opacity="0.87"/>
+      </g>
+      <path id="Path_15" data-name="Path 15" d="M3,13H5V11H3Zm0,4H5V15H3ZM3,9H5V7H3Zm4,4H21V11H7Zm0,4H21V15H7ZM7,7V9H21V7ZM3,13H5V11H3Zm0,4H5V15H3ZM3,9H5V7H3Zm4,4H21V11H7Zm0,4H21V15H7ZM7,7V9H21V7Z" fill="#383838"/>
+    </g>
+  </g>
+</svg>

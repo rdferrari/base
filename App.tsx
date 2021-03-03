@@ -1,17 +1,17 @@
 import React, { useState, useEffect, createContext } from "react";
+import { StatusBar } from "expo-status-bar";
 import Amplify, { Auth, Hub } from "aws-amplify";
 import { Text, View } from "react-native";
-import { NativeRouter, Route, Link } from "react-router-native";
+import { NativeRouter, Route, Switch } from "react-router-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 //Components
-import TextButtom from "./src/components/TextButton";
-import Header from "./src/components/header/Header";
+import Header from "./src/components/Header";
 // Pages
 import Home from "./src/pages/Home";
-// import SignIn from "./src/pages/SignIn";
-import About from "./src/pages/About";
-import AuthPage from "./src/pages/Auth";
+import SignIn from "./src/pages/SignIn";
+import SignUp from "./src/pages/SignUp";
+import List from "./src/pages/List";
 
 import config from "./aws-exports";
 Amplify.configure(config);
@@ -75,10 +75,15 @@ function App() {
   return (
     <UserStatusContext.Provider value={{ user }}>
       <NativeRouter>
-        <Header signOut={signOut} />
-        <Route exact path="/" component={Home} />
-        {/* <Route path="/sign-in" component={About} />
-        <Route path="/list" component={AuthPage} /> */}
+        <StatusBar style="dark" />
+        {/* <Header signOut={signOut} /> */}
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/list" component={List} />
+          <Route path="/sign-in" component={SignIn} />
+          <Route path="/sign-up" component={SignUp} />
+        </Switch>
       </NativeRouter>
     </UserStatusContext.Provider>
   );
