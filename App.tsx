@@ -35,6 +35,7 @@ function App() {
       switch (event) {
         case "signIn":
           console.log(`user signed in`);
+          getUserData();
           break;
         case "signUp":
           console.log(`user signed up`);
@@ -44,7 +45,9 @@ function App() {
           setUser(null);
           break;
         case "signIn_failure":
-          console.log("user sign in failed");
+          console.log(
+            "Sign in failed. Please, cheack your username and password."
+          );
           break;
         case "configured":
           console.log("the Auth module is configured");
@@ -73,11 +76,11 @@ function App() {
   }
 
   return (
-    <UserStatusContext.Provider value={{ user }}>
+    <UserStatusContext.Provider value={user}>
       <NativeRouter>
         <StatusBar style="dark" />
-        {/* <Header signOut={signOut} /> */}
-        <Header />
+        <Header signOut={signOut} />
+        {user && <Text>{user}</Text>}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/list" component={List} />

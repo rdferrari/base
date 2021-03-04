@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-native";
 import { View, Text, TouchableOpacity } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { UserStatusContext } from "../../App";
 
 export const styles = EStyleSheet.create({
   menu_container: {
@@ -17,25 +18,39 @@ export const styles = EStyleSheet.create({
   },
 });
 
-function Header(): JSX.Element {
+interface Props {
+  signOut(): void;
+}
+
+function Header({ signOut }: Props): JSX.Element {
   return (
-    <View style={styles.menu_container}>
-      <Link component={TouchableOpacity} to="/">
-        <Text style={styles.menu_link}>Home</Text>
-      </Link>
+    <UserStatusContext.Consumer>
+      {(user) => (
+        <View style={styles.menu_container}>
+          <Link component={TouchableOpacity} to="/">
+            <Text style={styles.menu_link}>Home</Text>
+          </Link>
 
-      <Link component={TouchableOpacity} to="/list">
-        <Text style={styles.menu_link}>List</Text>
-      </Link>
+          <Link component={TouchableOpacity} to="/list">
+            <Text style={styles.menu_link}>List</Text>
+          </Link>
 
-      <Link component={TouchableOpacity} to="/profiles">
-        <Text style={styles.menu_link}>Profiles</Text>
-      </Link>
-
-      <Link component={TouchableOpacity} to="/sign-in">
-        <Text style={styles.menu_link}>Sign in</Text>
-      </Link>
-    </View>
+          <Link component={TouchableOpacity} to="/profiles">
+            <Text style={styles.menu_link}>Profiles</Text>
+          </Link>
+          {console.log(user)}
+          {!user ? (
+            <Link component={TouchableOpacity} to="/sign-in">
+              <Text style={styles.menu_link}>Sign in</Text>
+            </Link>
+          ) : (
+            <Text onPress={signOut} style={styles.menu_link}>
+              Sign out
+            </Text>
+          )}
+        </View>
+      )}
+    </UserStatusContext.Consumer>
   );
 }
 

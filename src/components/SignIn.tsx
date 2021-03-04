@@ -1,9 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { View, Text, Button, TextInput } from "react-native";
 import { Auth } from "aws-amplify";
 import { useForm, Controller } from "react-hook-form";
-
-import { ComponentTitle, Paragraph, TextInput } from "../styles/general";
-import PrimaryButton from "./PrimaryButton";
 
 type FormValues = {
   username: string;
@@ -13,6 +12,8 @@ type FormValues = {
 const SignIn = () => {
   const { control, handleSubmit, errors, reset } = useForm();
   const [error, setError] = useState("");
+  let history = useHistory();
+  console.log(history);
 
   async function signIn(data: FormValues) {
     const { username, password } = data;
@@ -21,7 +22,7 @@ const SignIn = () => {
         username,
         password,
       });
-      console.log(user);
+      console.log({ user });
       reset({
         name: "",
         password: "",
@@ -33,9 +34,9 @@ const SignIn = () => {
   }
 
   return (
-    <>
-      <ComponentTitle>Sign in form</ComponentTitle>
-      <Paragraph>*Username</Paragraph>
+    <View>
+      <Text>Sign in form</Text>
+      <Text>*Username</Text>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -49,9 +50,9 @@ const SignIn = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.username && <Paragraph>Username is required.</Paragraph>}
+      {errors.username && <Text>Username is required.</Text>}
 
-      <Paragraph>*Password</Paragraph>
+      <Text>*Password</Text>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -65,16 +66,12 @@ const SignIn = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.password && <Paragraph>Password is required.</Paragraph>}
+      {errors.password && <Text>Password is required.</Text>}
 
       {error}
 
-      <PrimaryButton
-        onPress={handleSubmit(signIn)}
-        title="Sign in"
-        bgColor="papayawhip"
-      />
-    </>
+      <Button onPress={handleSubmit(signIn)} title="Sign in" />
+    </View>
   );
 };
 
