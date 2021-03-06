@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import Amplify, { Auth, Hub } from "aws-amplify";
 import { Text, View } from "react-native";
-import { NativeRouter, Route, Switch } from "react-router-native";
+import { NativeRouter, Route, Switch, Redirect } from "react-router-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 //Components
@@ -10,6 +10,7 @@ import Header from "./src/components/Header";
 // Pages
 import Home from "./src/pages/Home";
 import SignIn from "./src/pages/SignIn";
+import ConfirmationUser from "./src/pages/ConfirmationUser";
 import SignUp from "./src/pages/SignUp";
 import List from "./src/pages/List";
 
@@ -20,7 +21,9 @@ export const UserStatusContext = createContext("");
 
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
-  $textColor: "#0275d8",
+  $actionColor: "#00B995",
+  $lightColor: "#ffffff",
+  $darkColor: "#000000",
 });
 
 function App() {
@@ -84,8 +87,31 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/list" component={List} />
-          <Route path="/sign-in" component={SignIn} />
-          <Route path="/sign-up" component={SignUp} />
+
+          {user ? (
+            <Route path="/sign-in" render={() => <Redirect to="/list" />} />
+          ) : (
+            <Route path="/sign-in" component={SignIn} />
+          )}
+
+          {user ? (
+            <Route
+              path="/user-confirmation"
+              render={() => <Redirect to="/list" />}
+            />
+          ) : (
+            <Route path="/user-confirmation" component={ConfirmationUser} />
+          )}
+
+          {user ? (
+            <Route path="/sign-up" render={() => <Redirect to="/list" />} />
+          ) : (
+            <Route path="/sign-up" component={SignUp} />
+          )}
+
+          {/* <Route path="/sign-in" component={SignIn} /> */}
+          {/* <Route path="/user-confirmation" component={ConfirmationUser} /> */}
+          {/* <Route path="/sign-up" component={SignUp} /> */}
         </Switch>
       </NativeRouter>
     </UserStatusContext.Provider>

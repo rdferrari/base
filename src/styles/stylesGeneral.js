@@ -35,14 +35,23 @@ export const stylesGeneral = EStyleSheet.create({
     margin: 10,
   },
   // buttons
-  button_default: {
-    backgroundColor: "#00B995",
+  bt_default: {
+    backgroundColor: '$actionColor',
     height: 46,
     justifyContent: "center",
     marginTop: 40,
     width: 320,
   },
-  button_text: {
+  bt_action: {
+    backgroundColor: '$actionColor',
+  },
+  bt_light: {
+    backgroundColor: '$lightColor',
+  },
+  bt_dark: {
+    backgroundColor: '$darkColor',
+  },
+  bt_text: {
     alignSelf: "center",
     color: "white"
   },
