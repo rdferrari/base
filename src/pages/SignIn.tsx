@@ -32,53 +32,57 @@ const SignIn = () => {
 
   return (
     <View style={stylesGeneral.page_container}>
-      <Text style={stylesGeneral.page_title}>Sign in form</Text>
-      <Text style={stylesGeneral.page_text}>*Username</Text>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={stylesGeneral.input_default}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
+      <View style={stylesGeneral.auth_container}>
+        <Text style={stylesGeneral.page_title}>Sign in form</Text>
+        <View style={stylesGeneral.auth_form_container}>
+          <Text style={stylesGeneral.input_text}>*Username</Text>
+          <Controller
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <TextInput
+                style={stylesGeneral.input_default}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            )}
+            name="username"
+            rules={{ required: true }}
+            defaultValue=""
           />
-        )}
-        name="username"
-        rules={{ required: true }}
-        defaultValue=""
-      />
-      {errors.username && (
-        <Text style={stylesGeneral.text_alert}>Username is required.</Text>
-      )}
+          {errors.username && (
+            <Text style={stylesGeneral.text_alert}>Username is required.</Text>
+          )}
 
-      <Text style={stylesGeneral.page_text}>*Password</Text>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={stylesGeneral.input_default}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
+          <Text style={stylesGeneral.input_text}>*Password</Text>
+          <Controller
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <TextInput
+                style={stylesGeneral.input_default}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            )}
+            name="password"
+            rules={{ required: true }}
+            defaultValue=""
           />
-        )}
-        name="password"
-        rules={{ required: true }}
-        defaultValue=""
-      />
-      {errors.password && (
-        <Text style={stylesGeneral.text_alert}>Password is required.</Text>
-      )}
+          {errors.password && (
+            <Text style={stylesGeneral.text_alert}>Password is required.</Text>
+          )}
 
-      <Text style={stylesGeneral.text_alert}>{error}</Text>
+          <Text style={stylesGeneral.text_alert}>{error}</Text>
 
-      <TouchableOpacity
-        style={stylesGeneral.button_default}
-        onPress={handleSubmit(signIn)}
-      >
-        <Text style={stylesGeneral.button_text}>Sign in</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={stylesGeneral.button_default}
+            onPress={handleSubmit(signIn)}
+          >
+            <Text style={stylesGeneral.button_text}>Sign in</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
