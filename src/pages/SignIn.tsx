@@ -18,7 +18,7 @@ const SignIn = () => {
   async function signIn(data: FormValues) {
     const { username, password } = data;
     try {
-      const userSigned = await Auth.signIn({
+      await Auth.signIn({
         username,
         password,
       });
