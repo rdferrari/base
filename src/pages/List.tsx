@@ -3,24 +3,18 @@ import { useAppSelector, useAppDispatch } from "../../hooks";
 import { View, Text } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-import AddPost from "../features/posts/AddPost";
+// import AddPost from "../features/posts/AddPost";
+import AddTodo from "../features/todos/AddTodo";
 import { selectAllTodos, fetchTodos } from "../features/todos/todosSlice";
 
-export const styles = EStyleSheet.create({
-  my_text: {
-    fontSize: 100,
-  },
-});
-
-interface Post {
-  id: string;
-  title: string;
-  content: string;
+interface ITodo {
+  todo: { id?: string; name: string; description: string };
 }
 
-const TodoExcerpt = ({ todo }) => {
+const TodoExcerpt = ({ todo }: ITodo) => {
   return (
     <View key={todo.id}>
+      <Text>{todo.id}</Text>
       <Text>{todo.name}</Text>
       <Text>{todo.description}</Text>
     </View>
@@ -29,7 +23,6 @@ const TodoExcerpt = ({ todo }) => {
 
 // use styles as usual
 function List(): JSX.Element {
-  const posts = useAppSelector((state) => state.posts);
   const todos = useAppSelector(selectAllTodos);
 
   const dispatch = useAppDispatch();
@@ -58,18 +51,12 @@ function List(): JSX.Element {
     content = <div>{error}</div>;
   }
 
-  const renderedPosts = posts.map((post: Post) => (
-    <View key={post.id}>
-      <Text>{post.title}</Text>
-      <Text>{post.content.substring(0, 100)}</Text>
-    </View>
-  ));
-
   return (
     <View>
       <Text>My List</Text>
-      <AddPost />
-      {renderedPosts}
+
+      <AddTodo />
+
       {content}
     </View>
   );
