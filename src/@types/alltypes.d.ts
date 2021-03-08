@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 declare module 'react-router-native';
 declare module 'react-native-video';
+declare module 'react-redux';
 
 declare module "*.svg" {
     import React from 'react';

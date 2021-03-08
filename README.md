@@ -19,3 +19,7 @@ $ amplify push
 $ amplify status
 
 ## Github deploy via AWS web app.
+
+## Redux
+
+Create a slice. For example ./src/features/todos/todosSlice.tsx
