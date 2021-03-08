@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import { View, Text } from "react-native";
+import { View, ScrollView, Text, FlatList } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 // import AddPost from "../features/posts/AddPost";
@@ -39,14 +39,19 @@ function List(): JSX.Element {
   let content;
 
   if (todoStatus === "loading") {
-    content = <div className="loader">Loading...</div>;
+    content = <Text className="loader">Loading...</Text>;
   } else if (todoStatus === "succeeded") {
     // Sort todos in reverse chronological order by datetime string
     // const orderedPosts = todos
     //   .slice()
     //   .sort((a, b) => b.date.localeCompare(a.date));
 
-    content = todos.map((todo) => <TodoExcerpt key={todo.id} todo={todo} />);
+    content = (
+      <FlatList
+        data={todos}
+        renderItem={({ item }) => <TodoExcerpt key={item.id} todo={item} />}
+      />
+    );
   } else if (todoStatus === "error") {
     content = <div>{error}</div>;
   }
@@ -54,10 +59,10 @@ function List(): JSX.Element {
   return (
     <View>
       <Text>My List</Text>
-
-      <AddTodo />
-
-      {content}
+      <ScrollView>
+        <AddTodo />
+        {content}
+      </ScrollView>
     </View>
   );
 }
