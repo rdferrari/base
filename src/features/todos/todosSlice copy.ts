@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // AWS GraphQl
 import { API, graphqlOperation } from "aws-amplify";
 import { GraphQLResult } from "@aws-amplify/api";
@@ -8,7 +8,7 @@ import { createTodo } from "../../graphql/mutations";
 
 interface todosState {
   todos: []
-  status: string,
+  status: 'idle' | 'pending' | 'succeeded' | 'failed'
   error: string | null;
 }
 
@@ -70,6 +70,8 @@ const todosSlice = createSlice({
     builder.addCase(fetchTodos.fulfilled, (state, action ) => {
       state.status = 'succeeded'
       // Add any fetched todos to the array
+      console.log(initialState)
+      console.log(action.payload)
       state.todos = state.todos.concat(action.payload) 
     }),
     builder.addCase(fetchTodos.rejected, (state, action ) => {
@@ -84,11 +86,9 @@ const todosSlice = createSlice({
   },
 })
 
-// export const { todoUpdated } = todosSlice.actions
+// export const { todoAdded, todoUpdated } = todosSlice.actions
 
 export default todosSlice.reducer
-
-// export const selectAllTodos = (state) => state.todos.todos
 
 // export const selectTodoById = (state, todoId) =>
 //   state.todos.todos.find((todo) => todo.id === todoId)

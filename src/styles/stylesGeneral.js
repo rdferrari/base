@@ -22,6 +22,12 @@ export const stylesGeneral = EStyleSheet.create({
     fontWeight: "300",
     marginTop: -10,
   },
+  text_delete: {
+    color: "red",
+    fontSize: 12,
+    fontWeight: "300",
+    margin: 20,
+  },
   input_default: {
     backgroundColor: "#ffffff",
     height: 46,
